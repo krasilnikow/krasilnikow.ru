@@ -1,0 +1,54 @@
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'codropsicons';
+	src:url('../fonts/codropsicons/codropsicons.eot');
+	src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	background: #fff;
+	color: #383a3c;
+	font-weight: 400;
+	font-size: 1em;
+	line-height: 1.25;
+	font-family: 'Raleway', Calibri, Arial, sans-serif;
+	margin: 0;
+}
+
+.container {
+   height: 100%;
+}
+
+.container #head {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	background-size: cover;
+	z-index: 1;
+	background-image: url('../img/background.jpg');
+	height: 100%;
+}
+
+.container .main-title {
+	position: absolute;
+	margin: 0;
+	color: #f9f1e9;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate3d(-50%,-50%,0);
+	transform: translate3d(-50%,-50%,0);
+	font-family: 'Clicker Script', cursive;
+	font-weight: normal;
+	font-size: 8em;
+	padding: 0 0 0 10px;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
