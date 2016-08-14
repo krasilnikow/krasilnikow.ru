@@ -1,77 +1,66 @@
-$(document).ready(function () {
-   'use strict';
-   var width = window.innerWidth,
-      height = window.innerHeight,
-      circles = [],
-      largeHeader,
-      canvas,
-      ctx;
+'use strict';
 
-   init();
+class CircleDrawer {
+   constructor() {
+      this.circles = [];
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      this.largeHeader = $('#head');
+      this.largeHeader.height(this.height);
+      $(document).ready(function () {
+         this.canvas = document.getElementById('main-canvas');
+         this.canvas.width = this.width;
+         this.canvas.height = this.height;
+         this.ctx = this.canvas.getContext('2d');
 
-   function init() {
-      largeHeader = document.getElementById('head');
-      largeHeader.style.height = height + 'px';
-
-      canvas = document.getElementById('main-canvas');
-      canvas.width = width;
-      canvas.height = height;
-      ctx = canvas.getContext('2d');
-
-      for (var i = 0; i < width * 0.5; i++) {
-         circles.push(new Circle(width, height, ctx, init));
-      }
-      animate();
-      addListeners();
+         for (var i = 0; i < this.width * 0.5; i++) {
+            this.circles.push(new Circle(this.ctx));
+         }
+         this.animate();
+         this.addListeners();
+      }.bind(this));
    }
 
-   function addListeners() {
-      window.addEventListener('resize', resize);
+   addListeners() {
+      window.addEventListener('resize', this.resize);
    }
 
-   function scrollCheck() {
-      return document.body.scrollTop <= height;
+   scrollCheck() {
+      return document.body.scrollTop <= this.height;
    }
 
-   function resize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      largeHeader.style.height = height + 'px';
-      canvas.width = width;
-      canvas.height = height;
+   resize() {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      this.largeHeader.height(this.height);
+      this.canvas.width = this.width;
+      this.canvas.height = this.height;
    }
 
-   function animate() {
-      if (scrollCheck()) {
-         ctx.clearRect(0, 0, width, height);
-         for (var i = 0; i < circles.length; i++) {
-            circles[i].draw();
+   animate() {
+      if (this.scrollCheck()) {
+         this.ctx.clearRect(0, 0, this.width, this.height);
+         for (var i = 0; i < this.circles.length; i++) {
+            this.circles[i].draw();
          }
       }
-      requestAnimationFrame(animate);
+      requestAnimationFrame(this.animate.bind(this));
    }
-});
+}
 
 class Circle {
-   constructor(width, height, ctx){
-      this._width = width;
-      this._height = height;
+   constructor(ctx){
       this._ctx = ctx;
       this._setDefaultData()
    }
 
    _setDefaultData(){
       this.pos = {};
-      this.pos.x = Math.random() * this._width;
-      this.pos.y = this._height + Math.random() * 100;
+      this.pos.x = Math.random() * window.innerWidth;
+      this.pos.y = Math.random() * 100 + innerHeight;
       this.alpha = 0.1 + Math.random() * 0.3;
       this.scale = 0.1 + Math.random() * 0.3;
       this.velocity = Math.random();
-   }
-
-   resize(width, height){
-      this._width = width;
-      this._height = height;
    }
 
    draw() {
@@ -86,3 +75,5 @@ class Circle {
       this._ctx.fill();
    };
 }
+
+new CircleDrawer();
