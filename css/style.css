@@ -52,3 +52,16 @@ body {
 	padding: 0 0 0 10px;
 	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
 }
+
+@media only screen and (max-width: 960px) {
+	.container .main-title {
+		font-size: 6em;
+	}
+}
+
+
+@media only screen and (max-width: 480px) {
+	.container .main-title {
+		font-size: 3em;
+	}
+}
